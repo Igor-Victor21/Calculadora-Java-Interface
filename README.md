@@ -1,9 +1,6 @@
-- Calculadora em java finalizada
-- Calculadora apenas com botões (teclado esta desativado)
-- Contendo histórico dos cálculos e armazenando em um arquivo.txt
-- Feito no Intellij IDEA Community Edition
+- Calculadora em java finalizada Calculadora apenas com botões (teclado esta desativado), contendo histórico dos cálculos e armazenando em um arquivo.txt, feito no Intellij IDEA Community Edition
 
-Classe Principal (Main):
+
 package com.senai.InterfaceGrafica;
 
 public class Principal {
@@ -12,7 +9,6 @@ public class Principal {
     }
 }
 
-Classe Pai
 package com.senai.InterfaceGrafica;
 
 import javax.swing.*;
