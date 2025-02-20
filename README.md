@@ -1,7 +1,7 @@
-# Calculadora-Java-Interface
-Código de uma Calculadora feito em Java
-
-Classe Principal (Main)
+//CALCULADORA COM INTERFACE GRAFICA EM JAVA NAO FINALIZADA
+//ESTA FUNCIONANDO MAS SALVAR O HISTORICO EM UM ARQUIVO TXT 
+//TA MEIO BUGADO
+//CLASSE MAIN 
 
 package com.senai.InterfaceGrafica;
 
@@ -13,12 +13,15 @@ public class Principal {
     }
 }
 
-Classe Interface
-
+//CLASSE PAI 
 package com.senai.InterfaceGrafica;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InterfaceCalculadora {
@@ -301,7 +304,7 @@ public class InterfaceCalculadora {
         });
         //,
         botao19.addActionListener(e -> {
-            texto.setText(texto.getText() + ",");
+            texto.setText(texto.getText() + ".");
         });
         //= (VERIFICA QUANDO OPERAÇÃO MATEMATICA FOI REALIZADA)
         // ATRAVES DO IF OU ELSE IF
@@ -359,27 +362,33 @@ public class InterfaceCalculadora {
             }
 
             auxCalculoExibir = vetorCalculo[0]+" "+operadorMatematico+" "+vetorCalculo[1]+" = "+texto.getText();
-
+            //adicionando em um arrayList global o resultado das operações
+            //em formato de texto com a variavel auxCalculoExibir
+            historicoCalculos.add(auxCalculoExibir);
 
 
         });
         //HISTÓRICO
         botao21.addActionListener(e -> {
 
-            //adicionando em um arrayList global o resultado das operações
-            //em formato de texto com a variavel auxCalculoExibir
-            historicoCalculos.add(auxCalculoExibir);
+            //Salvando o Historico em um arquivo .txt
+           //criando uma variavel para colocar o nome do arquivo dentro dela
+            String nomeArquivo = "Arquivo.txt";
 
-
-// tentativa frustada de adicionar os resultados das equações em um arquivo txt
-//            String nomeArquivo = "Arquivo.txt";
-//        try{
-//            FileWriter escritor = new FileWriter(nomeArquivo,  true);
-//            escritor.write(texto+System.lineSeparator());
-//            escritor.close();
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
+            //fazendo um try catch para caso ocorra algum erro na hora de salvar
+            //os arquivos ele trate este erro na hora e rode o código mesmo assim
+            try{
+                //Classe FileWriter Responsavel pot salvar em um arquivo txt
+                FileWriter escritor = new FileWriter(nomeArquivo,true);
+                //metodo write serve para escrever um texto em um arquivo
+                escritor.write(texto+System.lineSeparator());
+                //fechando o arquivo após a escrita
+                escritor.close();
+            }catch (IOException ex){
+                //metodo printStackTrace serve para exibir o erro no ***CONSOLE***
+                //quando algo da errado
+                ex.printStackTrace();
+            }
 
             // chamando a função para exibir a tela de historico
             historico(historicoCalculos);
@@ -445,8 +454,64 @@ public class InterfaceCalculadora {
 
         // deixando tudo visivel
         tela.setVisible(true);
+        lerHistorico();
+
+    }
+
+    private static String[] lerHistorico() {
+        String nomeArquivo = "Arquivo.txt";
+
+        // fazendo um try catch caso ocorra algum erro,
+        // IOException irá tratar este erro e irá exibir
+        // no console
+        try{
+            //A classe BufferedReader responsavel por ler arquivos ou ler entradas
+            BufferedReader leitor = new BufferedReader(new FileReader(nomeArquivo));
+
+            //variavel para contar o número de linhas
+            int contadorLinhas = 0;
+
+            //while que irá ler as linhas do arquivo
+            //enquanto a linha do arquivo for diferente de nulo
+            //ele irá contar quantidade de linhas do arquivo
+            while (leitor.readLine() != null){
+                contadorLinhas++;
+            }
+            // quando parar não ter mais nada para ler nas linhas do arquivo
+            // o sistema irá parar de ler o arquivo .txt
+
+            //parando de ler o arquivo .txt
+            leitor.close();
+
+            //fazendo um array (vetor) de linhas com a quantidade de casas
+            //do tanto que o contador no while conseguiu captar
+            String linhas[] = new String[contadorLinhas];
+
+            //mais um objeto BufferedReader para ler os arquivos
+            leitor = new BufferedReader(new FileReader(nomeArquivo));
+
+            //passando para o array(vetor) oq o BufferedReader conseguir ler
+            //dentro do arquivo salvo atraves de um for que começa no indice 0
+            //e vai até o maximo que contadorLinhas conseguiu contar
+            for (int i = 0; i < contadorLinhas; i++){
+                linhas[i]= leitor.readLine();
+            }
+
+            //fechando o leitor de arquivo
+            leitor.close();
+
+            // retornando as linhas
+            return linhas;
+
+        //tratando o erro e mostrando a mensagem de erro
+        }catch (IOException e){
+            System.out.println("Erro ao ler o arquivo");
+            e.printStackTrace();
+            return null;
+        }
 
 
     }
 }
+
 
