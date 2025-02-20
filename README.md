@@ -1,19 +1,18 @@
-//CALCULADORA COM INTERFACE GRAFICA EM JAVA NAO FINALIZADA
-//ESTA FUNCIONANDO MAS SALVAR O HISTORICO EM UM ARQUIVO TXT 
-//TA MEIO BUGADO
-//CLASSE MAIN 
+- Calculadora em java finalizada
+- Calculadora apenas com botões (teclado esta desativado)
+- Contendo histórico dos cálculos e armazenando em um arquivo.txt
+- Feito no Intellij IDEA Community Edition
 
+Classe Principal (Main):
 package com.senai.InterfaceGrafica;
 
 public class Principal {
     public static void main(String[] args) {
         InterfaceCalculadora.calculadora();
-
-
     }
 }
 
-//CLASSE PAI 
+Classe Pai
 package com.senai.InterfaceGrafica;
 
 import javax.swing.*;
@@ -366,13 +365,8 @@ public class InterfaceCalculadora {
             //em formato de texto com a variavel auxCalculoExibir
             historicoCalculos.add(auxCalculoExibir);
 
-
-        });
-        //HISTÓRICO
-        botao21.addActionListener(e -> {
-
             //Salvando o Historico em um arquivo .txt
-           //criando uma variavel para colocar o nome do arquivo dentro dela
+            //criando uma variavel para colocar o nome do arquivo dentro dela
             String nomeArquivo = "Arquivo.txt";
 
             //fazendo um try catch para caso ocorra algum erro na hora de salvar
@@ -380,8 +374,15 @@ public class InterfaceCalculadora {
             try{
                 //Classe FileWriter Responsavel pot salvar em um arquivo txt
                 FileWriter escritor = new FileWriter(nomeArquivo,true);
+
                 //metodo write serve para escrever um texto em um arquivo
-                escritor.write(texto+System.lineSeparator());
+                //aki tive que adaptar utilizando o variavel auxiliar
+                //como tudo que aparecia pro usuario final era com a variavel
+                //auxiliar então eu so utilizei ela ao invés do JTextField igual
+                //o professor fez, e dei uma quebra de linha para ficar certinho
+                //um em baixo do outro no Arquivo.txt
+                escritor.write(auxCalculoExibir+"\n");
+
                 //fechando o arquivo após a escrita
                 escritor.close();
             }catch (IOException ex){
@@ -389,10 +390,12 @@ public class InterfaceCalculadora {
                 //quando algo da errado
                 ex.printStackTrace();
             }
+        });
+        //HISTÓRICO
+        botao21.addActionListener(e -> {
 
             // chamando a função para exibir a tela de historico
             historico(historicoCalculos);
-
 
         });
 
@@ -513,5 +516,4 @@ public class InterfaceCalculadora {
 
     }
 }
-
 
