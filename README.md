@@ -1,4 +1,28 @@
- Calculadora em java finalizada Calculadora apenas com botões (teclado esta desativado), contendo histórico dos cálculos e armazenando em um arquivo.txt, feito no Intellij IDEA Community, explicação logo abaixo 
+- Calculadora em java finalizada Calculadora apenas com botões (teclado esta desativado), contendo histórico dos cálculos e armazenando em um arquivo.txt, feito no Intellij IDEA Community Edition
+
+
+package com.senai.InterfaceGrafica;
+
+public class Principal {
+    public static void main(String[] args) {
+        InterfaceCalculadora.calculadora();
+    }
+}
+
+package com.senai.InterfaceGrafica;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class InterfaceCalculadora {
+    // FUNCIONAMENTO
+    // basicamente a calculadora é feita da seguinte forma
+    // duas variaveis globais e um vetor global
 
     //VETOR E SEUS INDICES [0] [1] [2] (Array)
     // vetor global armazena os 3 números da interface
@@ -28,18 +52,18 @@
     // ele receber os valores convertido em forma de texto
     // do vetor no indice 1 , 2 e 3 juntamente com o operador
     // matematico apenas para exibir e mostra para o usuario
-    // a conta final e quando precionar o botão de historico
+    // a conta final e quando precionar o botão de HistoricoSalvar
     // para exibir as contas ja feitas pelo sistema
-    // ps: botão de historico adiciona os valores da variavel
+    // ps: botão de HistoricoSalvar adiciona os valores da variavel
     // auxCalculoExibir dentro de um Arraylist para exibir em
     // forma de lista para os usuarios
     static String auxCalculoExibir;
 
     // ARRAYLIST
     // responsavel por receber o valor da variavel global auxCalculoExibir
-    // para mostrar para o usuario o historico das contas do usuario
-    // ps: explicando mais sobre no metodo de historico
-    // responsavel por exibir um nova tela de historico para o usuario
+    // para mostrar para o usuario o HistoricoSalvar das contas do usuario
+    // ps: explicando mais sobre no metodo de HistoricoSalvar
+    // responsavel por exibir um nova tela de HistoricoSalvar para o usuario
     static ArrayList<String> historicoCalculos = new ArrayList<>();
 
     // metodo interface grafica da calculadora
@@ -281,7 +305,7 @@
         // ATRAVES DO IF OU ELSE IF
         botao20.addActionListener(e -> {
             double calculo;
-            String historico;
+            String HistoricoSalvar;
             vetorCalculo[1] = Double.parseDouble(texto.getText());
 
             // VERIFICADORES DE QUAL OPERAÇÃO FAZER
@@ -296,9 +320,9 @@
                 //vetorCalculo recebe o resultado da operação no indece[2]
                 vetorCalculo[2]=calculo;
 
-                //historico recebe o valor da variavel auxiliar mais o operador matematico
+                //HistoricoSalvar recebe o valor da variavel auxiliar mais o operador matematico
                 //mais o que esta armazenado no JTextField e mais o resultado da operação
-                historico = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
+                HistoricoSalvar = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
 
                 //JTextField recebendo o valor do resultado da opração matematica
                 //atraves de texto
@@ -310,25 +334,25 @@
             else if (operadorMatematico == "-"){
                 calculo = vetorCalculo[0]-vetorCalculo[1];
                 vetorCalculo[2]=calculo;
-                historico = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
+                HistoricoSalvar = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
                 texto.setText(String.valueOf(vetorCalculo[2]));
             }
             else if (operadorMatematico == "%"){
                 calculo = vetorCalculo[0]%vetorCalculo[1];
                 vetorCalculo[2]=calculo;
-                historico = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
+                HistoricoSalvar = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
                 texto.setText(String.valueOf(vetorCalculo[2]));
             }
             else if (operadorMatematico == "/"){
                 calculo = vetorCalculo[0]/vetorCalculo[1];
                 vetorCalculo[2]=calculo;
-                historico = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
+                HistoricoSalvar = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
                 texto.setText(String.valueOf(vetorCalculo[2]));
             }
             else if (operadorMatematico == "X"){
                 calculo = vetorCalculo[0]*vetorCalculo[1];
                 vetorCalculo[2]=calculo;
-                historico = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
+                HistoricoSalvar = auxCalculoExibir+" " + operadorMatematico+ " "+texto.getText() + " = "+vetorCalculo[2];
                 texto.setText(String.valueOf(vetorCalculo[2]));
             }
 
@@ -366,16 +390,16 @@
         //HISTÓRICO
         botao21.addActionListener(e -> {
 
-            // chamando a função para exibir a tela de historico
-            historico(historicoCalculos);
+            // chamando a função para exibir a tela de HistoricoSalvar
+            HistoricoSalvar(historicoCalculos);
 
         });
 
 
     }
-    // metodo reponsavel por adicionar uma nova tela para exibir um historico
+    // metodo reponsavel por adicionar uma nova tela para exibir um HistoricoSalvar
     // com interface grafica para o usuario
-    public static void historico(ArrayList<String> historicoCalculos){
+    public static void HistoricoSalvar(ArrayList<String> historicoCalculos){
 
         // expliquei tudo isso ja la no topo do código
         JFrame tela = new JFrame("Histórico");
