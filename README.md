@@ -1,10 +1,4 @@
-- Calculadora em java finalizada Calculadora apenas com botões (teclado esta desativado), contendo histórico dos cálculos e armazenando em um arquivo.txt, feito no Intellij IDEA Community Edition
-
-
-public class InterfaceCalculadora {
-    // FUNCIONAMENTO
-    // basicamente a calculadora é feita da seguinte forma
-    // duas variaveis globais e um vetor global
+ Calculadora em java finalizada Calculadora apenas com botões (teclado esta desativado), contendo histórico dos cálculos e armazenando em um arquivo.txt, feito no Intellij IDEA Community 
 
     //VETOR E SEUS INDICES [0] [1] [2] (Array)
     // vetor global armazena os 3 números da interface
