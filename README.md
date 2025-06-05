@@ -1,24 +1,6 @@
 - Calculadora em java finalizada Calculadora apenas com botões (teclado esta desativado), contendo histórico dos cálculos e armazenando em um arquivo.txt, feito no Intellij IDEA Community Edition
 
 
-package com.senai.InterfaceGrafica;
-
-public class Principal {
-    public static void main(String[] args) {
-        InterfaceCalculadora.calculadora();
-    }
-}
-
-package com.senai.InterfaceGrafica;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class InterfaceCalculadora {
     // FUNCIONAMENTO
     // basicamente a calculadora é feita da seguinte forma
