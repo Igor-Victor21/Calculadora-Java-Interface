@@ -14,6 +14,9 @@ public class InterfaceCalculadora {
     //variavel para auxiliar no aramazenamento do historico
     static String auxCalc;
 
+    //variavel responsavel para mostrar os calculos logo a baixo da área de texto
+    static String auxText;
+
     //um vetor de lista que armazena os calculos
     static ArrayList<String> historicoCalculos = new ArrayList<>();
 
@@ -22,7 +25,7 @@ public class InterfaceCalculadora {
         JFrame janela = new JFrame("Calculadora");
 
         //tamanho janela
-        janela.setSize(338,460);
+        janela.setSize(338,500);
 
         //colocando o botão de fechar, quando fechar a janela o código vai parar de rodar
         janela.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +54,8 @@ public class InterfaceCalculadora {
         //desativando o teclado
         texto.setFocusable(false);
 
+        JLabel menssagem = new JLabel();
+
         //add botões
         //JButton botao1 =new JButton("√Δ");
         JButton botao1 =new JButton("%");
@@ -76,32 +81,34 @@ public class InterfaceCalculadora {
         JButton botao21 =new JButton("HISTÓRICO");
 
         //setando os tamanhos dos botões
-        botao1.setBounds(0,60,80,60);
-        botao2.setBounds(80,60,80,60);
-        botao3.setBounds(160,60,80,60);
-        botao4.setBounds(240,60,80,60);
-        botao5.setBounds(0,120,80,60);
-        botao6.setBounds(80,120,80,60);
-        botao7.setBounds(160,120,80,60);
-        botao8.setBounds(240,120,80,60);
-        botao9.setBounds(0,180,80,60);
-        botao10.setBounds(80,180,80,60);
-        botao11.setBounds(160,180,80,60);
-        botao12.setBounds(240,180,80,60);
-        botao13.setBounds(0,240,80,60);
-        botao14.setBounds(80,240,80,60);
-        botao15.setBounds(160,240,80,60);
-        botao16.setBounds(240,240,80,60);
-        botao17.setBounds(0,300,80,60);
-        botao18.setBounds(80,300,80,60);
-        botao19.setBounds(160,300,80,60);
-        botao20.setBounds(240,300,80,60);
-        botao21.setBounds(0,360,320,60);
+        menssagem.setBounds(0,60,320,40);
+        botao1.setBounds(0,100,80,60);
+        botao2.setBounds(80,100,80,60);
+        botao3.setBounds(160,100,80,60);
+        botao4.setBounds(240,100,80,60);
+        botao5.setBounds(0,160,80,60);
+        botao6.setBounds(80,160,80,60);
+        botao7.setBounds(160,160,80,60);
+        botao8.setBounds(240,160,80,60);
+        botao9.setBounds(0,220,80,60);
+        botao10.setBounds(80,220,80,60);
+        botao11.setBounds(160,220,80,60);
+        botao12.setBounds(240,220,80,60);
+        botao13.setBounds(0,280,80,60);
+        botao14.setBounds(80,280,80,60);
+        botao15.setBounds(160,280,80,60);
+        botao16.setBounds(240,280,80,60);
+        botao17.setBounds(0,340,80,60);
+        botao18.setBounds(80,340,80,60);
+        botao19.setBounds(160,340,80,60);
+        botao20.setBounds(240,340,80,60);
+        botao21.setBounds(0,400,320,60);
         texto.setSize(320,60);
 
         //add todos os Botões no JPanel, é importante alertar que *TEM QUE SER NO JPanel*
         //Pois se não havera bugs visuais na interface se adicionar os itens no JFrame
         //Add Primeiro no JPanel para depois adcionar o JPanel no JFrame para não ocorrer bugs
+        panel.add(menssagem);
         panel.add(botao1);
         panel.add(botao2);
         panel.add(botao3);
@@ -133,6 +140,8 @@ public class InterfaceCalculadora {
         //tornando os botões visiveis
         janela.setVisible(true);
 
+        //Precisa da auxText para mostrar os calculos abaixo que estão sendo feito
+        auxText="";
         //ADD FUNÇÕES AOS BOTÕES
 
         //%
@@ -143,6 +152,8 @@ public class InterfaceCalculadora {
             auxCalc = texto.getText();
 
             texto.setText("");
+            auxText = vetorCalculo[0]+" % "+texto.getText();
+            menssagem.setText(auxText);
         });
 
         //CE
@@ -161,23 +172,27 @@ public class InterfaceCalculadora {
 
             if (correnteTexto.length() > 0){
                 texto.setText(correnteTexto.substring(0, correnteTexto.length() - 1));
+                menssagem.setText(correnteTexto.substring(0, correnteTexto.length() -1));
             }
         });
 
         //7
         botao5.addActionListener(e -> {
             texto.setText(texto.getText() + "7");
+            menssagem.setText(auxText + texto.getText());
+
         });
 
         //8
         botao6.addActionListener(e -> {
             texto.setText(texto.getText() + "8");
-
+            menssagem.setText(auxText + texto.getText());
         });
 
         //9
         botao7.addActionListener(e -> {
             texto.setText(texto.getText() + "9");
+            menssagem.setText(auxText + texto.getText());
         });
 
         //x (vezes)
@@ -188,21 +203,28 @@ public class InterfaceCalculadora {
             auxCalc = texto.getText();
 
             texto.setText("");
+            auxText = vetorCalculo[0]+" X "+texto.getText();
+            menssagem.setText(auxText);
         });
 
         //4
         botao9.addActionListener(e -> {
             texto.setText(texto.getText() + "4");
+            menssagem.setText(auxText + texto.getText());
         });
 
         //5
         botao10.addActionListener(e -> {
             texto.setText(texto.getText() + "5");
+            menssagem.setText(auxText + texto.getText());
+
         });
 
         //6
         botao11.addActionListener(e -> {
             texto.setText(texto.getText() + "6");
+            menssagem.setText(auxText + texto.getText());
+
         });
 
         //-
@@ -213,23 +235,30 @@ public class InterfaceCalculadora {
             auxCalc = texto.getText();
 
             texto.setText("");
-
+            auxText = vetorCalculo[0]+" - "+texto.getText();
+            menssagem.setText(auxText);
 
         });
 
         //1
         botao13.addActionListener(e -> {
             texto.setText(texto.getText() + "1");
+            menssagem.setText(auxText + texto.getText());
+
         });
 
         //2
         botao14.addActionListener(e -> {
             texto.setText(texto.getText() + "2");
+            menssagem.setText(auxText + texto.getText());
+
         });
 
         //3
         botao15.addActionListener(e -> {
             texto.setText(texto.getText() + "3");
+            menssagem.setText(auxText + texto.getText());
+
         });
 
         //+
@@ -240,6 +269,8 @@ public class InterfaceCalculadora {
             auxCalc = texto.getText();
 
             texto.setText("");
+            auxText = vetorCalculo[0]+" + "+texto.getText();
+            menssagem.setText(auxText);
         });
 
         //÷ (divisão)
@@ -250,16 +281,21 @@ public class InterfaceCalculadora {
             auxCalc = texto.getText();
 
             texto.setText("");
+            auxText = vetorCalculo[0]+" / "+texto.getText();
+            menssagem.setText(auxText);
         });
 
         //0
         botao18.addActionListener(e -> {
             texto.setText(texto.getText() + "0");
+            menssagem.setText(auxText + texto.getText());
+
         });
 
         //,
         botao19.addActionListener(e -> {
             texto.setText(texto.getText() + ".");
+            menssagem.setText(auxText + texto.getText());
         });
 
         //= (VERIFICA QUANDO OPERAÇÃO MATEMATICA FOI REALIZADA, ATRAVES DO IF OU ELSE IF)
@@ -288,6 +324,8 @@ public class InterfaceCalculadora {
                 //atraves de texto
                 //ps: foi transformada de double para String com String.valueOf(vetorCalculo[2]
                 texto.setText(String.valueOf(vetorCalculo[2]));
+
+
 
             }
             //segue o mesmo padrão para todos
@@ -351,6 +389,7 @@ public class InterfaceCalculadora {
                 //quando algo da errado
                 ex.printStackTrace();
             }
+            menssagem.setText(auxText+ String.valueOf(vetorCalculo[1])+" = "+ String.valueOf(vetorCalculo[2]));
         });
 
         //HISTÓRICO
@@ -358,7 +397,6 @@ public class InterfaceCalculadora {
 
             HistoricoSalvar historicoSalvar = new HistoricoSalvar();
             //chamando a função para exibir a tela de historico
-            janela.dispose();
             HistoricoSalvar.historico(historicoCalculos);
 
         });
